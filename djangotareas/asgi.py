@@ -1,5 +1,5 @@
 """
-ASGI config for Hospital project.
+ASGI config for djangotareas project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

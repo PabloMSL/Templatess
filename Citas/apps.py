@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class TemplatesConfig(AppConfig):
+class CitasConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Plantillas'
+    name = 'Citas'
