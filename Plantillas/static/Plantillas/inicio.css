@@ -1,0 +1,144 @@
+/* -------- RESET -------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f5f6ff;
+    color: #333;
+}
+
+/* ========================
+   NAVBAR
+   ======================== */
+.navbar {
+    width: 100%;
+    padding: 18px 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    z-index: 50;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #6a6cff, #9a4bff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #6a6cff;
+}
+
+/* ========================
+   HERO SECTION
+   ======================== */
+.hero {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+    background: url('../img/museo.jpg') center/cover no-repeat;
+    position: relative;
+    margin-top: 70px;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+
+.hero-text {
+    position: relative;
+    color: #fff;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    letter-spacing: 1px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+/* ========================
+   GALLERY
+   ======================== */
+.gallery-section {
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.gallery-section h2 {
+    font-size: 2.4rem;
+    margin-bottom: 40px;
+    color: #444;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(0,0,0,0.25);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+/* ========================
+   FOOTER
+   ======================== */
+.footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+    background: #202020;
+    color: #fff;
+}
+
