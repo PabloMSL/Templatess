@@ -18,3 +18,14 @@ class RecetaCreate(generics.ListCreateAPIView):
 class RecetaDelete(generics.RetrieveUpdateDestroyAPIView):
     queryset = Receta.objects.all()
     serializer_class = RecetaSerializer 
+    
+    
+def farmacia_dashboard(request):
+    medicamentos = Medicamento.objects.all()
+    recetas = Receta.objects.all()
+
+    contexto = {
+        'medicamentos': medicamentos,
+        'recetas': recetas
+    }
+    return render(request, 'Medicamento/FarmaciaDashboard.html', contexto)

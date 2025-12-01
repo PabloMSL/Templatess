@@ -1,5 +1,6 @@
 from django.db import models
 from Doctor.models import Doctor
+from django.contrib.auth.models import User
 
 class Paciente(models.Model):
     nombre = models.CharField(max_length=100)
@@ -10,6 +11,8 @@ class Paciente(models.Model):
     tipo_sangre = models.CharField(max_length=5)
     alergias = models.TextField(blank=True)
     fecha_Registro = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+
 
 class HistorialMedico(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)

@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmacia - Hospital Moderno</title>
+    <link rel="stylesheet" href="{% static 'Medicamento/style.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'img/logo.jpg' %}" alt="Hospital Moderno">
+            <span>Hospital Moderno - Farmacia</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#medicamentos">Medicamentos</a></li>
+            <li><a href="#recetas">Recetas</a></li>
+        </ul>
+    </nav>
+
+    <!-- Medicamentos -->
+    <section id="medicamentos" class="section">
+        <h2>Medicamentos</h2>
+        <div class="card-grid">
+            {% for med in medicamentos %}
+            <div class="card shadow">
+                <h3>{{ med.nombre }}</h3>
+                <p>{{ med.descripcion }}</p>
+                <p>Precio: ${{ med.precio }}</p>
+                <p>Stock: {{ med.stock }}</p>
+            </div>
+            {% empty %}
+            <p>No hay medicamentos registrados.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Recetas -->
+    <section id="recetas" class="section">
+        <h2>Recetas</h2>
+        <div class="card-grid">
+            {% for receta in recetas %}
+            <div class="card shadow">
+                <h3>Frecuencia de la receta {{ receta.frecuencia }}</h3>
+                <p>Fecha: {{ receta.duracion }}</p>
+                <ul>
+                    {% for instrucciones in receta.instrucciones_set.all %}
+                    <li>{{ instrucciones.medicamento.nombre }} x {{ instrucciones.cantidad }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% empty %}
+            <p>No hay recetas registradas.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Hospital Moderno - Farmacia</p>
+    </footer>
+</body>
+</html>

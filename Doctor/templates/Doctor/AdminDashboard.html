@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Hospital Moderno</title>
+    <link rel="stylesheet" href="{% static 'Doctor/admin.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="admin-navbar">
+        <div class="logo">
+            <img src="{% static 'img/logo.jpg' %}" alt="Hospital Moderno">
+            <span>Hospital Moderno - Admin</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#especialidades">Especialidades</a></li>
+            <li><a href="#habitaciones">Habitaciones</a></li>
+        </ul>
+    </nav>
+
+    <!-- Dashboard -->
+    <main class="dashboard">
+        <!-- Sección Especialidades -->
+        <section id="especialidades" class="admin-section">
+            <h2>Gestión de Especialidades</h2>
+            <div class="card shadow">
+                <button class="btn-add">Agregar Especialidad</button>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for especialidad in especialidades %}
+                        <tr>
+                            <td>{{ especialidad.id }}</td>
+                            <td>{{ especialidad.nombre }}</td>
+                            <td>{{ especialidad.descripcion }}</td>
+                            <td>
+                                <button class="btn-edit">Editar</button>
+                                <button class="btn-delete">Eliminar</button>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4">No hay especialidades registradas.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Habitaciones -->
+        <section id="habitaciones" class="admin-section">
+            <h2>Gestión de Habitaciones</h2>
+            <div class="card shadow">
+                <button class="btn-add">Agregar Habitación</button>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Número</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for habitacion in habitaciones %}
+                        <tr>
+                            <td>{{ habitacion.id }}</td>
+                            <td>{{ habitacion.numero }}</td>
+                            <td>{{ habitacion.tipo }}</td>
+                            <td>{{ habitacion.estado }}</td>
+                            <td>
+                                <button class="btn-edit">Editar</button>
+                                <button class="btn-delete">Eliminar</button>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5">No hay habitaciones registradas.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Hospital Moderno - Admin Panel</p>
+    </footer>
+</body>
+</html>
