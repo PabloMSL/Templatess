@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ nombre_pagina }}</title>
+    <link rel="stylesheet" href="{% static 'Doctor/doctor.css' %}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'img/logo.jpg' %}" alt="Hospital Moderno">
+            <span class="hospital-name">Hospital Moderno</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#about">Sobre Nosotros</a></li>
+            <li><a href="#services">Servicios</a></li>
+            <li><a href="#doctors">Doctores</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+</nav>
+
+
+    <!-- ESTADO DEL HOSPITAL -->
+    <div class="status-bar">
+        {% if abierto %}
+            🟢 Estamos abiertos
+        {% else %}
+            🔴 Cerrado por hoy
+        {% endif %}
+    </div>
+
+    <section id="hero" class="hero">
+        <div class="overlay">    
+            <h1>Hospital Moderno</h1>
+            <p>Atendiendo tu salud con excelencia, tecnología de punta y un equipo de especialistas comprometidos contigo.</p>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container card-section">  
+            <div class="card shadow">      
+                <h2>Sobre Nosotros</h2> 
+                <p>
+                Hospital Moderno es un centro médico dedicado a brindar atención integral de salud. 
+                Contamos con profesionales altamente capacitados, tecnología de última generación y un enfoque centrado en el bienestar del paciente. 
+                Nuestra misión es ofrecer servicios médicos confiables, rápidos y humanos, garantizando seguridad y confort en cada visita.
+                </p>
+            </div>  
+        </div>
+    </section>
+
+    <section id="services" class="services"> 
+        <div class="container">       
+            <h2>Servicios</h2>     
+            <div class="card-grid">  
+                <div class="card shadow">
+                    <h3>Consultas Generales</h3>             
+                    <p>Atención rápida y personalizada para todas tus necesidades médicas.</p>
+                </div>     
+                <div class="card shadow">          
+                    <h3>Urgencias 24h</h3>         
+                    <p>Equipo especializado disponible todo el día para casos críticos.</p>        
+                </div>          
+                <div class="card shadow">             
+                    <h3>Laboratorio y Diagnóstico</h3>
+                    <p>Exámenes confiables y resultados rápidos con tecnología avanzada.</p>        
+                </div>    
+            </div>  
+        </div>
+    </section>
+
+
+    <!-- SECCIÓN DE DOCTORES -->
+    <main class="container" id="doctors">
+        <h2>Conoce a nuestros doctores</h2>
+        <div class="doctor-list">
+            {% for doctor in doctores %}
+                <div class="doctor-card">
+                    <img src="{% static 'img/doctor.jpg' %}" alt="Doctor">
+                    <h3>{{ doctor.nombre }}</h3>
+                    <p>{{ doctor.email }}</p>
+                </div>
+            {% empty %}
+                <p>No hay doctores disponibles en este momento.</p>
+            {% endfor %}
+        </div>
+    </main>
+
+    <section id="contact" class="contact">
+        <div class="container card-section">
+            <div class="card shadow">         
+                <h2>Contacto</h2>
+                <p>Email: info@hospitalmoderno.com | Teléfono: +123 456 7890</p>
+                <p>Dirección: Calle Salud 123, Ciudad</p>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 Hospital Moderno</p>
+    </footer>
+
+</body>
+</html>

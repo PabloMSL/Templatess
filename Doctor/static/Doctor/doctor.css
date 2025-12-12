@@ -1,0 +1,225 @@
+body {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #007bff;
+    padding: 15px 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+}
+
+.hospital-name {
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 5px;
+}
+
+.container {
+    padding: 50px 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 20px 0;
+}
+
+.shadow {
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.shadow:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 12px 30px rgba(0,0,0,0.3);
+}
+
+/* Estado del hospital */
+.status-bar {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+.about {
+    padding: 50px 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card-grid .card {
+    flex: 1 1 250px;
+    text-align: center;
+}
+
+/* Contenedor de doctores */
+.container {
+    padding: 20px;
+}
+
+.doctor-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+
+.doctor-card {
+    width: 220px;
+    text-align: center;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.doctor-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+
+.doctor-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 12px 20px rgba(0,0,0,0.3);
+}
+
+#doctors h2{
+    text-align: center;
+    font-size: 2.8rem;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1.2rem;
+    }
+    .card-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .doctor-list {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    background: url("https://upload.wikimedia.org/wikipedia/commons/1/1c/Letrero_del_Hospital_de_Medina_del_Campo.JPG") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.hero .overlay h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+.hero .overlay p {
+    font-size: 1.2rem;
+}
+
+.contact {
+    padding: 50px 20px;
+    background-color: #e0e0e0;
+    text-align: center;
+}
+
+.contact .card {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
