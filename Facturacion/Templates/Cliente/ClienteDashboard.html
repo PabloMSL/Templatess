@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturación Interactiva - Hospital Moderno</title>
+    <link rel="stylesheet" href="{% static 'Cliente/style.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'img/logo.jpg' %}" alt="Hospital Moderno">
+            <span>Hospital Moderno</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#citas">Citas</a></li>
+            <li><a href="#ingresos">Ingresos</a></li>
+            <li><a href="#facturas">Facturas</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección Citas -->
+    <section id="citas" class="section">
+        <h2>Mis Citas</h2>
+        <button class="btn-action" onclick="openModal('modalCita')">Solicitar Nueva Cita</button>
+        <div class="card-grid">
+            {% for cita in citas %}
+            <div class="card shadow">
+                <h3>{{ cita.Especialidad.nombre }} con {{ cita.doctor.nombre }}</h3>
+                </div>
+                <p>Fecha/Hora: {{ cita.fecha_hora }}</p>
+                <p>Estado: {{ cita.estado }}</p>
+                <p>Motivo: {{ cita.motivo }}</p>
+                <p>Notas: {{ cita.notas }}</p>
+            </div>
+            {% empty %}
+            <p>No tienes citas programadas.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Sección Ingresos -->
+    <section id="ingresos" class="section">
+        <h2>Mis Ingresos</h2>
+        <button class="btn-action" onclick="openModal('modalIngreso')">Registrar Nuevo Ingreso</button>
+        <div class="card-grid">
+            {% for ingreso in ingresos %}
+            <div class="card shadow">
+                <h3>Habitación: {{ ingreso.habitacion.numero }} ({{ ingreso.habitacion.tipo }})</h3>
+                <p>Fecha ingreso: {{ ingreso.fecha_ingreso }}</p>
+                <p>Fecha alta: {% if ingreso.fecha_alta %}{{ ingreso.fecha_alta }}{% else %}---{% endif %}</p>
+                <p>Motivo: {{ ingreso.motivo }}</p>
+                <p>Doctor tratante: {{ ingreso.doctor_tratante.nombre }}</p>
+            </div>
+            {% empty %}
+            <p>No tienes ingresos registrados.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Sección Facturas -->
+    <section id="facturas" class="section">
+        <h2>Mis Facturas</h2>
+        <div class="card-grid">
+            {% for factura in facturas %}
+            {% if factura %}
+                <div class="card shadow" id="factura-card-{{ factura.id }}">                
+                    <p>Fecha emisión: {{ factura.fecha_emision }}</p>                
+                    <p>Subtotal: ${{ factura.subtotal }}</p>                
+                    <p>IVA: ${{ factura.iva }}</p>                
+                    <p>Total: ${{ factura.total }}</p>                
+                    <p>Estado: {% if factura.pagada %}Pagada{% else %}Pendiente{% endif %}</p>                
+                    <p>Método de pago: {{ factura.metodo_pago }}</p>     
+                    <a href="{% url 'descargar_factura' factura.id %}" class="btn-action btn-descargar" style="margin-right: 5px;">
+                        Descargar PDF
+                    </a>
+                    <form method="POST" action="{% url 'enviar_factura' factura.id %}" style="display: inline;">
+                        {% csrf_token %}     
+                        <button type="submit" class="btn-action">Enviar por Email</button>
+                    </form>     
+                    {% if not factura.pagada %}            
+                    <button class="btn-action" onclick="pagarFactura({{ factura.id }})">Pagar Ahora</button>
+                    {% endif %}
+                </div>
+            {% endif %}
+            {% empty %}
+            <p>No tienes facturas registradas.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Hospital Moderno</p>
+    </footer>
+
+    <!-- Modales -->
+    <div class="modal" id="modalCita">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalCita')">&times;</span>
+            <h2>Solicitar Cita</h2>
+            <form method="POST" action="{% url 'crear_cita' %}">
+                {% csrf_token %}
+                <label>Especialidad:</label>
+                <select name="especialidad" required>
+                    {% for esp in especialidades %}
+                    <option value="{{ esp.id }}">{{ esp.nombre }}</option>
+                    {% endfor %}
+                </select>
+                <label>Doctor:</label>
+                <select name="doctor" required>
+                    {% for doc in doctores %}
+                    <option value="{{ doc.id }}">{{ doc.nombre }}</option>
+                    {% endfor %}
+                </select>
+                <label>Fecha/Hora:</label>
+                <input type="datetime-local" name="fecha_hora" required>
+                <label>Motivo:</label>
+                <textarea name="motivo" required></textarea>
+                <button type="submit" class="btn-action">Enviar Cita</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modalIngreso">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalIngreso')">&times;</span>
+            <h2>Registrar Ingreso</h2>
+            <form method="POST" action="{% url 'crear_ingreso' %}">
+                {% csrf_token %}
+                <label>Habitación:</label>
+                <select name="habitacion" required>
+                    {% for hab in habitaciones %}
+                    <option value="{{ hab.id }}">{{ hab.numero }} - {{ hab.tipo }}</option>
+                    {% endfor %}
+                </select>
+                <label>Doctor tratante:</label>
+                <select name="doctor" required>
+                    {% for doc in doctores %}
+                    <option value="{{ doc.id }}">{{ doc.nombre }}</option>
+                    {% endfor %}
+                </select>
+                <label>Motivo:</label>
+                <textarea name="motivo" required></textarea>
+                <button type="submit" class="btn-action">Registrar Ingreso</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Scripts -->
+    <script src="/Facturacion/static/Cliente/cliente.js"></script>
+</body>
+</html>

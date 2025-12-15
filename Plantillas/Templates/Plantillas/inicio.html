@@ -1,0 +1,50 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ nombre_museo }}</title>
+    <link rel="stylesheet" href="{% static 'Plantillas/inicio.css' %}">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <div class="nav-logo">{{ nombre_museo }}</div>
+    <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#exposiciones">Exposiciones</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#info">Información</a></li>
+    </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header id="inicio" class="hero">
+    <div class="hero-text">
+        <h1>{{ nombre_museo }}</h1>
+        <p>{{ descripcion }}</p>
+    </div>
+</header>
+
+<!-- ===== GALERÍA ===== -->
+<section id="galeria" class="gallery-section">
+    <h2>Galería</h2>
+
+    <div class="gallery">
+        {% for img in imagenes %}
+        <div class="gallery-item">
+            <img src="{% static img %}" alt="Exposición">
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="info" class="footer">
+    <p>&copy; {{ nombre_museo }} – Todos los derechos reservados</p>
+</footer>
+
+</body>
+</html>
+
