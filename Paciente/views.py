@@ -24,7 +24,6 @@ class HistorialDelete(generics.RetrieveUpdateDestroyAPIView):
     queryset = HistorialMedico.objects.all()
     serializer_class = HistorialSerializer
 
-
 def paciente_dashboard(request):
     # Obtener paciente relacionado al usuario logueado
     paciente = getattr(request.user, 'paciente', None)

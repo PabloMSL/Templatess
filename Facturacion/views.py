@@ -89,7 +89,6 @@ def crear_cita(request):
         )
     return redirect('cliente_dashboard')  # Redirige al dashboard
 
-
 def crear_ingreso(request):
     if request.method == "POST":
         paciente = request.user.paciente
